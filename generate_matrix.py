@@ -3,7 +3,9 @@ import math
 import sys
 import random as rd
 
-def gen_matrix(n, m):
+def gen_matrix():
+    n = rd.randint(1, 100)
+    m = rd.randint(1, 100)
 
     c = np.random.rand(n) # objective function
     b = np.random.rand(m)
@@ -11,14 +13,14 @@ def gen_matrix(n, m):
 
     return a, b, c
 
-def gen_matrices(k):
+# def gen_matrices(k):
     
-    res = []
+#     res = []
     
-    for _ in range(k):
-        n = rd.randint(1, 100)
-        m = rd.randint(1, 100)
-        mat = gen_matrix(n, m)
-        res.append(mat)
+#     for _ in range(k):
+#         n = rd.randint(1, 100)
+#         m = rd.randint(1, 100)
+#         mat = gen_matrix(n, m)
+#         res.append(mat)
     
-    return res
+#     return res
