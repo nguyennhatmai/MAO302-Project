@@ -32,7 +32,6 @@ def primal_simplex(c, a, b, x):
     while True:
         if np.all(z_n >= 0):
             status = 'optimal'
-            print('optimal')
             break
         
         j = np.where(z_n < 0)[0][0]
@@ -60,19 +59,17 @@ def primal_simplex(c, a, b, x):
         z_n[i] = s
 
         #update optimal variable value
-        x[list(b_idx)[j]] = t
-        x[list(n_idx)[i]] = s
+        x[list(b_idx)[i]] = t
+        x[list(n_idx)[j]] = s
 
         xi = np.dot(np.dot(c_b.T, np.linalg.inv(B)), b)  - np.dot((np.dot(np.dot(np.linalg.inv(B), N).T, c_b) - c_n).T, z_n)
 
-        print(b_idx, i, j)
-        temp_b = b_idx[j]
-        temp_n = n_idx[i]
+        temp_b = b_idx[i]
+        temp_n = n_idx[j]
 
-        b_idx = sorted(b_idx.difference(set(n_idx[i])).union(set(b_idx[j])))
-        n_idx = sorted(all_var.difference(b_idx))
+        b_idx[b_idx == temp_b] = temp_n
+        n_idx[n_idx == temp_n] = temp_b
 
-        print(b_idx)
         B = a[:, b_idx]
         N = a[:, n_idx]
 
